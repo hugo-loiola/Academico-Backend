@@ -9,7 +9,6 @@ export default class extends BaseSchema {
       table.string('nome',100).notNullable()
       table.integer('cpf')
       table.string('matricula',20).notNullable()
-      table.string('salario',100)
       table.string('email',100)
       table.string('telefone',15)
       table.integer('cep')

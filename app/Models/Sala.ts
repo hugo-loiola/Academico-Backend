@@ -5,6 +5,15 @@ export default class Sala extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public nome: string
+
+  @column()
+  public capacidade: number
+
+  @column()
+  public tipo: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
