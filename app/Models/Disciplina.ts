@@ -9,7 +9,7 @@ export default class Disciplina extends BaseModel {
   public nome: string
 
   @column()
-  public curso_id: number
+  public cursoId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
