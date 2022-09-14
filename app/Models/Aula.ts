@@ -6,7 +6,7 @@ export default class Aula extends BaseModel {
   public id: number
 
   @column()
-  public data: string
+  public data: Date
 
   @column()
   public conteudo: string
