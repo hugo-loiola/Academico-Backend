@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class CursosController {
-  index() {
-  }
+import Curso from 'App/Models/Curso'
 
-  store() {
-    const dados = { nome: 'ADS', duracao: 2, modalidade: 'p' }
-    return dados
+export default class CursosController {
+  index () {
+    return Curso.all()
+  }
+  hugo (){
+    return 456
   }
 }

@@ -26,6 +26,60 @@
 
     node ace make:model [nome] -m
 
+### Código de uma migration
+
+```js
+import BaseSchema from '@ioc:Adonis/Lucid/Schema'
+
+export default class extends BaseSchema {
+  protected tableName = 'cursos'
+
+  public async up () {
+    this.schema.createTable(this.tableName, (table) => {
+      table.increments('id')
+      table.string('nome', 50).notNullable()
+      table.integer('duracao')
+      table.string('modalidade',1).notNullable()
+
+      /**
+       * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
+       */
+      table.timestamp('created_at', { useTz: true })
+      table.timestamp('updated_at', { useTz: true })
+    })
+  }
+
+  public async down () {
+    this.schema.dropTable(this.tableName)
+  }
+}
+```
+
+```js
+import { DateTime } from 'luxon'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+
+export default class Curso extends BaseModel {
+  @column({ isPrimary: true })
+  public id: number
+
+  @column()
+  public nome: string
+
+  @column()
+  public duracao: number
+
+  @column()
+  public modalidade: string
+
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public updatedAt: DateTime
+}
+```
+
 ### Rodar as Migration
 
     node ace migration:run
@@ -33,6 +87,8 @@
 ### Voltar as Migration
 
     node ace migration:rollback
+    ou
+    node ace migration:refresh
 
 ### Voltar as Migration ao início
 
