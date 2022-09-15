@@ -7,7 +7,8 @@ export default class CursosController {
   index () {
     return Curso.all()
   }
-  hugo (){
-    return 456
+  store ({request}){
+    const dados = request.only(['nome', 'duracao', 'modalidade'])
+    return Curso.create(dados)
   }
 }

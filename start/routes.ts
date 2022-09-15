@@ -24,9 +24,7 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route
-  .group(() => {
-    Route.get('/', 'CursosController.index')
-    Route.get('/hugo', 'CursosController.hugo')
-  })
-  .prefix('/cursos')
+Route.group(() => {
+  Route.get('/', 'CursosController.index')
+  Route.post('/', 'CursosController.store')
+}).prefix('/cursos')
