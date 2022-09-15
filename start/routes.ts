@@ -28,3 +28,8 @@ Route.group(() => {
   Route.get('/', 'CursosController.index')
   Route.post('/', 'CursosController.store')
 }).prefix('/cursos')
+
+Route.group(() => {
+  Route.get('/', 'DisciplinasController.index')
+  Route.post('/', 'DisciplinasController.store')
+}).prefix('/disciplina')
