@@ -33,3 +33,43 @@ Route.group(() => {
   Route.get('/', 'DisciplinasController.index')
   Route.post('/', 'DisciplinasController.store')
 }).prefix('/disciplina')
+
+Route.group(() => {
+  Route.get('/', 'SalasController.index')
+  Route.post('/', 'SalasController.store')
+}).prefix('/sala')
+
+Route.group(() => {
+  Route.get('/', 'SemestresController.index')
+  Route.post('/', 'SemestresController.store')
+}).prefix('/semestre')
+
+Route.group(() => {
+  Route.get('/', 'ProfessorsController.index')
+  Route.post('/', 'ProfessorsController.store')
+}).prefix('/professor')
+
+Route.group(() => {
+  Route.get('/', 'AlunosController.index')
+  Route.post('/', 'AlunosController.store')
+}).prefix('/aluno')
+
+Route.group(() => {
+  Route.get('/', 'TurmasController.index')
+  Route.post('/', 'TurmasController.store')
+}).prefix('/turma')
+
+Route.group(() => {
+  Route.get('/', 'TurmaAlunosController.index')
+  Route.post('/', 'TurmaAlunosController.store')
+}).prefix('/turma-aluno')
+
+Route.group(() => {
+  Route.get('/', 'AulasController.index')
+  Route.post('/', 'AulasController.store')
+}).prefix('/aula')
+
+Route.group(() => {
+  Route.get('/', 'ChamadasController.index')
+  Route.post('/', 'ChamadasController.store')
+}).prefix('/chamada')
