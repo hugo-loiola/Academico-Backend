@@ -14,17 +14,37 @@
 
     node ace make:controller [Nome]
 
-### Codigo de uma rota com Controller
-```js
-import Curso from 'App/Models/Curso'
+### Controller
+
+```ts
+export default class RevisaosController {
+  ex1({ request }) {
+    const dados = request.body();
+    if (dados.salario <= 2000) {
+      const reajuste = 1.5;
+      const newSal = dados.salario * reajuste;
+      return { newSal };
+    } else {
+      const reajuste = 1.3;
+      const newSal = dados.salario * reajuste;
+      return { newSal };
+    }
+  }
+}
+```
+
+### Controller com Model
+
+```ts
+import Curso from "App/Models/Curso";
 
 export default class CursosController {
-  index () {
-    return Curso.all()
+  index() {
+    return Curso.all();
   }
-  store ({request}){
-    const dados = request.only(['nome', 'duracao', 'modalidade'])
-    return Curso.create(dados)
+  store({ request }) {
+    const dados = request.only(["nome", "duracao", "modalidade"]);
+    return Curso.create(dados);
   }
 }
 ```
@@ -43,56 +63,57 @@ export default class CursosController {
 
 ### Código de uma migration
 
-```js
-import BaseSchema from '@ioc:Adonis/Lucid/Schema'
+```ts
+import BaseSchema from "@ioc:Adonis/Lucid/Schema";
 
 export default class extends BaseSchema {
-  protected tableName = 'cursos'
+  protected tableName = "cursos";
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
-      table.string('nome', 50).notNullable()
-      table.integer('duracao')
-      table.string('modalidade',1).notNullable()
+      table.increments("id");
+      table.string("nome", 50).notNullable();
+      table.integer("duracao");
+      table.string("modalidade", 1).notNullable();
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
-    })
+      table.timestamp("created_at", { useTz: true });
+      table.timestamp("updated_at", { useTz: true });
+    });
   }
 
-  public async down () {
-    this.schema.dropTable(this.tableName)
+  public async down() {
+    this.schema.dropTable(this.tableName);
   }
 }
 ```
+
 ### Codigo de um Model
 
-```js
-import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+```ts
+import { DateTime } from "luxon";
+import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
 
 export default class Curso extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
 
   @column()
-  public nome: string
+  public nome: string;
 
   @column()
-  public duracao: number
+  public duracao: number;
 
   @column()
-  public modalidade: string
+  public modalidade: string;
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  public createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+  public updatedAt: DateTime;
 }
 ```
 
