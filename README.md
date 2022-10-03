@@ -1,6 +1,6 @@
 # Revisao_BackEnd
 
-## Meu estudo sobre `AdonisJS`.
+## Meu estudo sobre `AdonisJS`
 
 ### Iniciar um projeto.
 
@@ -9,6 +9,12 @@
 ### Start o servidor de desenvolvimento.
 
     node ace serve --watch
+
+### Rota
+
+```ts
+Route.resource('/cursos', 'CursosController').apiOnly()
+```
 
 ### Criando um Controller.
 
@@ -19,15 +25,15 @@
 ```ts
 export default class RevisaosController {
   ex1({ request }) {
-    const dados = request.body();
+    const dados = request.body()
     if (dados.salario <= 2000) {
-      const reajuste = 1.5;
-      const newSal = dados.salario * reajuste;
-      return { newSal };
+      const reajuste = 1.5
+      const newSal = dados.salario * reajuste
+      return { newSal }
     } else {
-      const reajuste = 1.3;
-      const newSal = dados.salario * reajuste;
-      return { newSal };
+      const reajuste = 1.3
+      const newSal = dados.salario * reajuste
+      return { newSal }
     }
   }
 }
@@ -36,15 +42,15 @@ export default class RevisaosController {
 ### Controller com Model
 
 ```ts
-import Curso from "App/Models/Curso";
+import Curso from 'App/Models/Curso'
 
 export default class CursosController {
   index() {
-    return Curso.all();
+    return Curso.all()
   }
   store({ request }) {
-    const dados = request.only(["nome", "duracao", "modalidade"]);
-    return Curso.create(dados);
+    const dados = request.only(['nome', 'duracao', 'modalidade'])
+    return Curso.create(dados)
   }
 }
 ```
@@ -69,10 +75,10 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class extends BaseSchema {
   protected tableName = 'disciplinas'
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('nome',50)
+      table.string('nome', 50)
       table.integer('curso_id').unsigned().references('id').inTable('cursos').notNullable()
 
       /**
@@ -83,7 +89,7 @@ export default class extends BaseSchema {
     })
   }
 
-  public async down () {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }
@@ -92,27 +98,27 @@ export default class extends BaseSchema {
 ### Codigo de um Model
 
 ```ts
-import { DateTime } from "luxon";
-import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
+import { DateTime } from 'luxon'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Curso extends BaseModel {
   @column({ isPrimary: true })
-  public id: number;
+  public id: number
 
   @column()
-  public nome: string;
+  public nome: string
 
   @column()
-  public duracao: number;
+  public duracao: number
 
   @column()
-  public modalidade: string;
+  public modalidade: string
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime;
+  public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime;
+  public updatedAt: DateTime
 }
 ```
 
