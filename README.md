@@ -4,11 +4,11 @@
 
 <br>
 
-### Iniciar um projeto.
+### Iniciar um projeto
 
     npm init adonis-ts-app@latest [nome]
 
-### Start o servidor de desenvolvimento.
+### Iniciar o servidor de desenvolvimento
 
     node ace serve --watch
 
@@ -44,15 +44,39 @@ export default class RevisaosController {
 ### Controller com Model
 
 ```ts
+/* eslint-disable @typescript-eslint/explicit-member-accessibility */
+// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+
 import Curso from "App/Models/Curso";
 
 export default class CursosController {
-  index() {
-    return Curso.all();
+  // Ver todos os cursos
+  async index() {
+    return await Curso.all();
   }
-  store({ request }) {
+  // Criar um curso
+  async store({ request }) {
     const dados = request.only(["nome", "duracao", "modalidade"]);
-    return Curso.create(dados);
+    return await Curso.create(dados);
+  }
+  // Ver um curso em específico
+  async show({ request }) {
+    const id = request.param("id");
+    return await Curso.findOrFail(id);
+  }
+  // Deletar um curso
+  async destroy({ request }) {
+    const id = request.param("id");
+    const curso = await Curso.findOrFail(id);
+
+    return await curso.delete();
+  }
+  // Alterar um curso existente
+  async update({ request }) {
+    const id = request.param("id");
+    const curso = await Curso.findOrFail(id); // Luxon dateTime is used
+
+    return await curso.save();
   }
 }
 ```
@@ -61,7 +85,7 @@ export default class CursosController {
 
     npm i @adonisjs/lucid
 
-### Configurando o `lucid`.
+### Configurando o `lucid`
 
     node ace configure @adonisjs/lucid
 
@@ -102,7 +126,7 @@ export default class extends BaseSchema {
 }
 ```
 
-### Codigo de um Model
+### Código de um Model
 
 ```ts
 import { DateTime } from "luxon";
