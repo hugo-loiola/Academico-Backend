@@ -4,19 +4,27 @@
 import Curso from "App/Models/Curso";
 
 export default class CursosController {
-  index() {
-    return Curso.all();
+  // Ver todos os cursos
+  async index() {
+    return await Curso.all();
   }
-  store({ request }) {
+  // Criar um curso
+  async store({ request }) {
     const dados = request.only(["nome", "duracao", "modalidade"]);
-    return Curso.create(dados);
+    return await Curso.create(dados);
   }
-  show({ request }) {
+  // Ver um curso em específico
+  async show({ request }) {
     const id = request.param("id");
-    return Curso.findOrFail(id);
+    return await Curso.findOrFail(id);
   }
+  // Deletar um curso
+  async destroy({ request }) {
+    const id = request.param("id");
+    const curso = await Curso.findOrFail(id);
 
-  destroy(id) {}
-
-  update({ request }) {}
+    return curso.delete();
+  }
+  // Alterar um curso existente
+  async update({ request }) {}
 }
