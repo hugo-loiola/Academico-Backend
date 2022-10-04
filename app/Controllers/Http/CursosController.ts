@@ -23,8 +23,13 @@ export default class CursosController {
     const id = request.param("id");
     const curso = await Curso.findOrFail(id);
 
-    return curso.delete();
+    return await curso.delete();
   }
   // Alterar um curso existente
-  async update({ request }) {}
+  async update({ request }) {
+    const id = request.param("id");
+    const curso = await Curso.findOrFail(id); // Luxon dateTime is used
+
+    return await curso.save();
+  }
 }
