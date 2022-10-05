@@ -28,7 +28,10 @@ export default class CursosController {
   // Alterar um curso existente
   async update({ request }) {
     const id = request.param("id");
-    const curso = await Curso.findOrFail(id); // Luxon dateTime is used
+    const curso = await Curso.findOrFail(id);
+    const dados = request.only(["nome", "duracao", "modalidade"]);
+
+    curso.merge(dados);
 
     return await curso.save();
   }
