@@ -44,9 +44,6 @@ export default class RevisaosController {
 ### Controller com Model
 
 ```ts
-/* eslint-disable @typescript-eslint/explicit-member-accessibility */
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
 import Curso from "App/Models/Curso";
 
 export default class CursosController {
@@ -74,7 +71,10 @@ export default class CursosController {
   // Alterar um curso existente
   async update({ request }) {
     const id = request.param("id");
-    const curso = await Curso.findOrFail(id); // Luxon dateTime is used
+    const curso = await Curso.findOrFail(id);
+    const dados = request.only(["nome", "duracao", "modalidade"]);
+
+    curso.merge(dados);
 
     return await curso.save();
   }
