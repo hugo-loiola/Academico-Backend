@@ -1,14 +1,33 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Sala from 'App/Models/Sala'
+import Sala from "App/Models/Sala";
 
 export default class SalasController {
-  index (){
-    return Sala.all()
+  async index() {
+    return await Sala.all();
   }
-  store ({request}){
-    const dados = request.only(['nome', 'capacidade', 'tipo'])
-    return Sala.createMany(dados)
+  async store({ request }) {
+    const dados = request.only(["nome", "capacidade", "tipo"]);
+    return await Sala.createMany(dados);
+  }
+  async show({ request }) {
+    const id = request.param("id");
+    return await Sala.findOrFail(id);
+  }
+  async destroy({ request }) {
+    const id = request.param("id");
+    const sala = await Sala.findOrFail(id);
+
+    return sala.delete();
+  }
+  async update({ request }) {
+    const id = request.param("id");
+    const sala = await Sala.findOrFail(id);
+    const dados = request.only(["nome", "capacidade", "tipo"]);
+
+    sala.merge(dados);
+
+    return sala.save();
   }
 }
