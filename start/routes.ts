@@ -28,7 +28,7 @@ Route.resource("/cursos", "CursosController").apiOnly();
 Route.resource("/disciplinas", "DisciplinasController").apiOnly();
 Route.resource("/salas", "SalasController").apiOnly();
 Route.resource("/semestres", "SemestresController").apiOnly();
-Route.resource("/professor", "ProfessorsController").apiOnly();
+Route.resource("/professores", "ProfessorsController").apiOnly();
 Route.resource("/alunos", "AlunosController").apiOnly();
 Route.resource("/turmas", "TurmasController").apiOnly();
 Route.resource("/turma_alunos", "TurmaAlunosController").apiOnly();
