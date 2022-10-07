@@ -9,7 +9,7 @@ export default class ChamadasController {
   }
   async store({ request }) {
     const dados = request.only(["aulaId", "alunoId", "presenca"]);
-    return await Chamada.createMany(dados);
+    return await Chamada.create(dados);
   }
   async show({ request }) {
     const id = request.param("id");

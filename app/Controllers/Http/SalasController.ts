@@ -9,7 +9,7 @@ export default class SalasController {
   }
   async store({ request }) {
     const dados = request.only(["nome", "capacidade", "tipo"]);
-    return await Sala.createMany(dados);
+    return await Sala.create(dados);
   }
   async show({ request }) {
     const id = request.param("id");

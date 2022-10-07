@@ -9,7 +9,7 @@ export default class AulasController {
   }
   async store({ request }) {
     const dados = request.only(["data", "conteudo"]);
-    return await Aula.createMany(dados);
+    return await Aula.create(dados);
   }
   async show({ request }) {
     const id = request.param("id");
