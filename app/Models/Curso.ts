@@ -1,22 +1,26 @@
-import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { DateTime } from "luxon";
+import { BaseModel, column, hasMany, HasMany } from "@ioc:Adonis/Lucid/Orm";
+import Disciplina from "./Disciplina";
 
 export default class Curso extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
 
   @column()
-  public nome: string
+  public nome: string;
 
   @column()
-  public duracao: number
+  public duracao: number;
 
   @column()
-  public modalidade: string
+  public modalidade: string;
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  public createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+  public updatedAt: DateTime;
+
+  @hasMany(() => Disciplina)
+  public disciplinas: HasMany<typeof Disciplina>;
 }
