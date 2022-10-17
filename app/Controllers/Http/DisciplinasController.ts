@@ -5,7 +5,7 @@ import Disciplina from "App/Models/Disciplina";
 
 export default class DisciplinasController {
   async index() {
-    return await Disciplina.all();
+    return await Disciplina.query().preload("curso");
   }
   async store({ request }) {
     const dados = request.only(["nome", "cursoId"]);

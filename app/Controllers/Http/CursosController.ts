@@ -6,7 +6,7 @@ import Curso from "App/Models/Curso";
 export default class CursosController {
   // Ver todos os cursos
   async index() {
-    return await Curso.all();
+    return await Curso.query().preload("disciplinas");
   }
   // Criar um curso
   async store({ request }) {
