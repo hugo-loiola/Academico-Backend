@@ -1,6 +1,6 @@
 # Meu Academico
 
-## Estudo sobre `AdonisJS`
+## Estudo sobre `AdonisJS`.
 
 <br>
 
