@@ -1,33 +1,33 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Chamada from "App/Models/Chamada";
+import Chamada from 'App/Models/Chamada'
 
 export default class ChamadasController {
   async index() {
-    return await Chamada.all();
+    return await Chamada.all()
   }
   async store({ request }) {
-    const dados = request.only(["aulaId", "alunoId", "presenca"]);
-    return await Chamada.create(dados);
+    const dados = request.only(['aulaId', 'alunoId', 'presenca'])
+    return await Chamada.create(dados)
   }
   async show({ request }) {
-    const id = request.param("id");
-    return await Chamada.findOrFail(id);
+    const id = request.param('id')
+    return await Chamada.findOrFail(id)
   }
   async destroy({ request }) {
-    const id = request.param("id");
-    const chamada = await Chamada.findOrFail(id);
+    const id = request.param('id')
+    const chamada = await Chamada.findOrFail(id)
 
-    return await chamada.delete();
+    return await chamada.delete()
   }
   async update({ request }) {
-    const id = request.param("id");
-    const chamada = await Chamada.findOrFail(id);
-    const dados = request.only(["aulaId", "alunoId", "presenca"]);
+    const id = request.param('id')
+    const chamada = await Chamada.findOrFail(id)
+    const dados = request.only(['aulaId', 'alunoId', 'presenca'])
 
-    chamada.merge(dados);
+    chamada.merge(dados)
 
-    return await chamada.save();
+    return await chamada.save()
   }
 }

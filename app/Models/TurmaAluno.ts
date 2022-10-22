@@ -1,27 +1,27 @@
-import { DateTime } from "luxon";
-import { BaseModel, belongsTo, BelongsTo, column } from "@ioc:Adonis/Lucid/Orm";
-import Turma from "./Turma";
-import Aluno from "./Aluno";
+import { DateTime } from 'luxon'
+import { BaseModel, belongsTo, BelongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import Turma from './Turma'
+import Aluno from './Aluno'
 
 export default class TurmaAluno extends BaseModel {
   @column({ isPrimary: true })
-  public id: number;
+  public id: number
 
   @column()
-  public turmaId: number;
+  public turmaId: number
 
   @column()
-  public alunoId: number;
+  public alunoId: number
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime;
+  public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime;
+  public updatedAt: DateTime
 
   @belongsTo(() => Turma)
-  public turma: BelongsTo<typeof Turma>;
+  public turma: BelongsTo<typeof Turma>
 
   @belongsTo(() => Aluno)
-  public aluno: BelongsTo<typeof Aluno>;
+  public aluno: BelongsTo<typeof Aluno>
 }

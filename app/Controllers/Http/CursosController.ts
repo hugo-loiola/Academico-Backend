@@ -1,38 +1,38 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Curso from "App/Models/Curso";
+import Curso from 'App/Models/Curso'
 
 export default class CursosController {
   // Ver todos os cursos
   async index() {
-    return await Curso.query().preload("disciplinas");
+    return await Curso.query().preload('disciplinas')
   }
   // Criar um curso
   async store({ request }) {
-    const dados = request.only(["nome", "duracao", "modalidade"]);
-    return await Curso.create(dados);
+    const dados = request.only(['nome', 'duracao', 'modalidade'])
+    return await Curso.create(dados)
   }
   // Ver um curso em específico
   async show({ request }) {
-    const id = request.param("id");
-    return await Curso.findOrFail(id);
+    const id = request.param('id')
+    return await Curso.findOrFail(id)
   }
   // Deletar um curso
   async destroy({ request }) {
-    const id = request.param("id");
-    const curso = await Curso.findOrFail(id);
+    const id = request.param('id')
+    const curso = await Curso.findOrFail(id)
 
-    return await curso.delete();
+    return await curso.delete()
   }
   // Alterar um curso existente
   async update({ request }) {
-    const id = request.param("id");
-    const curso = await Curso.findOrFail(id);
-    const dados = request.only(["nome", "duracao", "modalidade"]);
+    const id = request.param('id')
+    const curso = await Curso.findOrFail(id)
+    const dados = request.only(['nome', 'duracao', 'modalidade'])
 
-    curso.merge(dados);
+    curso.merge(dados)
 
-    return await curso.save();
+    return await curso.save()
   }
 }
