@@ -1,30 +1,30 @@
-import { DateTime } from "luxon";
-import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
-import Aula from "./Aula";
-import Aluno from "./Aluno";
+import { DateTime } from 'luxon'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import Aula from './Aula'
+import Aluno from './Aluno'
 
 export default class Chamada extends BaseModel {
   @column({ isPrimary: true })
-  public id: number;
+  public id: number
 
   @column()
-  public aulaId: number;
+  public aulaId: number
 
   @column()
-  public alunoId: number;
+  public alunoId: number
 
   @column()
-  public presenca: string;
+  public presenca: string
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime;
+  public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime;
+  public updatedAt: DateTime
 
   @belongsTo(() => Aula)
-  public aula: BelongsTo<typeof Aula>;
+  public aula: BelongsTo<typeof Aula>
 
   @belongsTo(() => Aluno)
-  public aluno: BelongsTo<typeof Aluno>;
+  public aluno: BelongsTo<typeof Aluno>
 }

@@ -1,4 +1,4 @@
-# Meu Academico
+# Meu Acadêmico
 
 ## Estudo sobre `AdonisJS`
 

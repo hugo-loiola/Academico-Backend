@@ -1,34 +1,27 @@
-import { DateTime } from "luxon";
-import {
-  BaseModel,
-  BelongsTo,
-  belongsTo,
-  column,
-  HasMany,
-  hasMany,
-} from "@ioc:Adonis/Lucid/Orm";
-import Curso from "./Curso";
-import Turma from "./Turma";
+import { DateTime } from 'luxon'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import Curso from './Curso'
+import Turma from './Turma'
 
 export default class Disciplina extends BaseModel {
   @column({ isPrimary: true })
-  public id: number;
+  public id: number
 
   @column()
-  public nome: string;
+  public nome: string
 
   @column()
-  public cursoId: number;
+  public cursoId: number
 
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime;
+  public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime;
+  public updatedAt: DateTime
 
   @belongsTo(() => Curso)
-  public curso: BelongsTo<typeof Curso>;
+  public curso: BelongsTo<typeof Curso>
 
   @hasMany(() => Turma)
-  public turma: HasMany<typeof Turma>;
+  public turma: HasMany<typeof Turma>
 }
