@@ -5,7 +5,7 @@ import Professor from 'App/Models/Professor'
 
 export default class ProfessorsController {
   async index() {
-    return await Professor.all()
+    return await Professor.query().preload('turmas')
   }
   async store({ request }) {
     const dados = request.only([

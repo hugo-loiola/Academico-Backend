@@ -5,7 +5,11 @@ import Turma from 'App/Models/Turma'
 
 export default class TurmasController {
   async index() {
-    return await Turma.all()
+    return await Turma.query()
+      .preload('professor')
+      .preload('semestre')
+      .preload('disciplina')
+      .preload('sala')
   }
   async store({ request }) {
     const dados = request.only([
