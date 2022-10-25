@@ -6,8 +6,6 @@ import {
   column,
   HasMany,
   hasMany,
-  HasOne,
-  hasOne,
   ManyToMany,
   manyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
@@ -45,23 +43,24 @@ export default class Turma extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
   @belongsTo(() => Sala)
   public sala: BelongsTo<typeof Sala>
 
-  @hasOne(() => Professor)
-  public professor: HasOne<typeof Professor>
-
   @belongsTo(() => Semestre)
-  public semestre: BelongsTo<typeof Semestre>
+  public semeste: BelongsTo<typeof Semestre>
 
-  @hasMany(() => Disciplina)
-  public disciplina: HasMany<typeof Disciplina>
+  @belongsTo(() => Professor)
+  public professores: BelongsTo<typeof Professor>
+
+  @belongsTo(() => Disciplina)
+  public disciplina: BelongsTo<typeof Disciplina>
+
+  @hasMany(() => Aula)
+  public aula: HasMany<typeof Aula>
 
   @manyToMany(() => Aluno, {
     pivotTable: 'turma_alunos',
   })
-  public aluno: ManyToMany<typeof Aluno>
-
-  @belongsTo(() => Aula)
-  public aula: BelongsTo<typeof Aula>
+  public alunos: ManyToMany<typeof Aluno>
 }

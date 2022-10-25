@@ -4,6 +4,8 @@ import {
   BelongsTo,
   belongsTo,
   column,
+  HasMany,
+  hasMany,
   HasOne,
   hasOne,
   ManyToMany,
@@ -11,6 +13,7 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import Turma from './Turma'
 import Aluno from './Aluno'
+import Chamada from './Chamada'
 
 export default class Aula extends BaseModel {
   @column({ isPrimary: true })
@@ -34,6 +37,6 @@ export default class Aula extends BaseModel {
   @belongsTo(() => Turma)
   public turma: BelongsTo<typeof Turma>
 
-  @manyToMany(() => Aluno)
-  public alunos: ManyToMany<typeof Aluno>
+  @hasMany(() => Chamada)
+  public alunos: HasMany<typeof Chamada>
 }
