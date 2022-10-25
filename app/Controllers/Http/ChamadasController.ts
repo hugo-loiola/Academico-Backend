@@ -5,7 +5,7 @@ import Chamada from 'App/Models/Chamada'
 
 export default class ChamadasController {
   async index() {
-    return await Chamada.all()
+    return await Chamada.query().preload('aula')
   }
   async store({ request }) {
     const dados = request.only(['aulaId', 'alunoId', 'presenca'])

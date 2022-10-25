@@ -6,7 +6,7 @@ import Turma from 'App/Models/Turma'
 export default class TurmasController {
   async index() {
     return await Turma.query()
-      .preload('professor')
+      .preload('professores')
       .preload('semestre')
       .preload('disciplina')
       .preload('sala')

@@ -26,5 +26,5 @@ export default class Aula extends BaseModel {
   public turma: BelongsTo<typeof Turma>
 
   @hasMany(() => Chamada)
-  public alunos: HasMany<typeof Chamada>
+  public chamada: HasMany<typeof Chamada>
 }

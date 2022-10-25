@@ -48,7 +48,7 @@ export default class Turma extends BaseModel {
   public sala: BelongsTo<typeof Sala>
 
   @belongsTo(() => Semestre)
-  public semeste: BelongsTo<typeof Semestre>
+  public semestre: BelongsTo<typeof Semestre>
 
   @belongsTo(() => Professor)
   public professores: BelongsTo<typeof Professor>

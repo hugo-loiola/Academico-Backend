@@ -5,7 +5,7 @@ import TurmaAluno from 'App/Models/TurmaAluno'
 
 export default class TurmaAlunosController {
   async index() {
-    return await TurmaAluno.all()
+    return await TurmaAluno.query()
   }
   async store({ request }) {
     const dados = request.only(['turmaId', 'alunoId'])

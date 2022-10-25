@@ -5,7 +5,7 @@ import Semestre from 'App/Models/Semestre'
 
 export default class SemestresController {
   async index() {
-    return await Semestre.all()
+    return await Semestre.query().preload('turmas')
   }
   async store({ request }) {
     const dados = request.only('nome', 'dataInicio', 'dataFim')

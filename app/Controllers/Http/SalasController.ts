@@ -5,7 +5,7 @@ import Sala from 'App/Models/Sala'
 
 export default class SalasController {
   async index() {
-    return await Sala.all()
+    return await Sala.query().preload('turmas')
   }
   async store({ request }) {
     const dados = request.only(['nome', 'capacidade', 'tipo'])

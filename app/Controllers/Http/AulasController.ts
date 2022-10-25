@@ -5,7 +5,7 @@ import Aula from 'App/Models/Aula'
 
 export default class AulasController {
   async index() {
-    return await Aula.query().preload('alunos').preload('turma')
+    return await Aula.query().preload('chamada').preload('turma')
   }
   async store({ request }) {
     const dados = request.only(['data', 'conteudo'])

@@ -5,7 +5,7 @@ import Aluno from 'App/Models/Aluno'
 
 export default class AlunosController {
   async index() {
-    return await Aluno.query().preload('turmas').preload('aulas')
+    return await Aluno.query().preload('turmas').preload('chamadas')
   }
   async store({ request }) {
     const dados = request.only([
