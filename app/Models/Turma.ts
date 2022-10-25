@@ -8,6 +8,8 @@ import {
   hasMany,
   HasOne,
   hasOne,
+  ManyToMany,
+  manyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
 import Professor from './Professor'
 import Disciplina from './Disciplina'
@@ -15,6 +17,7 @@ import Semestre from './Semestre'
 import Aula from './Aula'
 import TurmaAluno from './TurmaAluno'
 import Sala from './Sala'
+import Aluno from './Aluno'
 
 export default class Turma extends BaseModel {
   @column({ isPrimary: true })
@@ -55,9 +58,9 @@ export default class Turma extends BaseModel {
   @hasMany(() => Aula)
   public aulas: HasMany<typeof Aula>
 
-  @hasMany(() => TurmaAluno)
-  public turmaAlunos: HasMany<typeof TurmaAluno>
-
   @hasMany(() => Disciplina)
   public disciplina: HasMany<typeof Disciplina>
+
+  @manyToMany(() => Aluno)
+  public aluno: ManyToMany<typeof Aluno>
 }
