@@ -15,7 +15,6 @@ import Professor from './Professor'
 import Disciplina from './Disciplina'
 import Semestre from './Semestre'
 import Aula from './Aula'
-import TurmaAluno from './TurmaAluno'
 import Sala from './Sala'
 import Aluno from './Aluno'
 
@@ -55,12 +54,14 @@ export default class Turma extends BaseModel {
   @belongsTo(() => Semestre)
   public semestre: BelongsTo<typeof Semestre>
 
-  @hasMany(() => Aula)
-  public aulas: HasMany<typeof Aula>
-
   @hasMany(() => Disciplina)
   public disciplina: HasMany<typeof Disciplina>
 
-  @manyToMany(() => Aluno)
+  @manyToMany(() => Aluno, {
+    pivotTable: 'turma_alunos',
+  })
   public aluno: ManyToMany<typeof Aluno>
+
+  @belongsTo(() => Aula)
+  public aula: BelongsTo<typeof Aula>
 }

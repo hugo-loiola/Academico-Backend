@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Turma from './Turma'
 import Aula from './Aula'
 
@@ -43,9 +43,13 @@ export default class Aluno extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @manyToMany(() => Aula)
-  public chamada: ManyToMany<typeof Aula>
+  @manyToMany(() => Aula, {
+    pivotTable: 'chamadas',
+  })
+  public aulas: ManyToMany<typeof Aula>
 
-  @manyToMany(() => Turma)
+  @manyToMany(() => Turma, {
+    pivotTable: 'turma_alunos',
+  })
   public turmas: ManyToMany<typeof Turma>
 }
