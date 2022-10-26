@@ -207,3 +207,57 @@ export default class AlunosController {
   }
 }
 ```
+
+### Validação
+
+    node ace make:validator [Nome]
+
+### Exemplo de Validação
+
+```ts
+import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+
+export default class AlunoValidator {
+  constructor(protected ctx: HttpContextContract) {}
+
+  public schema = schema.create({
+    nome: schema.string.optional([
+      rules.unique({
+        column: 'nome',
+        table: 'alunos',
+      }),
+    ]),
+
+    cpf: schema.number.nullableAndOptional(),
+
+    matricula: schema.string.optional([
+      rules.unique({
+        column: 'matricula',
+        table: 'alunos',
+      }),
+    ]),
+
+    email: schema.string.nullableAndOptional(),
+
+    telefone: schema.string.nullableAndOptional(),
+
+    cep: schema.number.nullableAndOptional(),
+
+    logadouro: schema.string.nullableAndOptional(),
+
+    complemento: schema.string.nullableAndOptional(),
+
+    numero: schema.string.optional([
+      rules.unique({
+        column: 'numero',
+        table: 'alunos',
+      }),
+    ]),
+
+    bairro: schema.string.nullableAndOptional(),
+  })
+
+  public messages: CustomMessages = {}
+}
+```
