@@ -1,4 +1,4 @@
-import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class AlunoValidator {
@@ -24,14 +24,15 @@ export default class AlunoValidator {
    *    ```
    */
   public schema = schema.create({
-    nome: schema.string.optional([
+    nome: schema.string([
+      rules.alpha(),
       rules.unique({
         column: 'nome',
         table: 'alunos',
       }),
     ]),
 
-    cpf: schema.number.nullableAndOptional(),
+    cpf: schema.number(),
 
     matricula: schema.string.optional([
       rules.unique({
@@ -40,7 +41,10 @@ export default class AlunoValidator {
       }),
     ]),
 
-    email: schema.string.nullableAndOptional(),
+    email: schema.string.nullableAndOptional([
+      rules.email(),
+      rules.unique({ table: 'alunos', column: 'email' }),
+    ]),
 
     telefone: schema.string.nullableAndOptional(),
 
