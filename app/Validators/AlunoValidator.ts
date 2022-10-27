@@ -7,7 +7,7 @@ export default class AlunoValidator {
   public schema = schema.create({
     nome: schema.string([rules.alpha(), rules.maxLength(100)]),
 
-    cpf: schema.number.optional([rules.minLength(15), rules.maxLength(15)]),
+    cpf: schema.number.optional([rules.unique({ table: 'alunos', column: 'id' })]),
 
     matricula: schema.string([
       rules.unique({
@@ -15,7 +15,6 @@ export default class AlunoValidator {
         table: 'alunos',
       }),
       rules.alphaNum(),
-      rules.minLength(20),
       rules.maxLength(20),
     ]),
 
@@ -25,9 +24,13 @@ export default class AlunoValidator {
       rules.maxLength(100),
     ]),
 
-    telefone: schema.number.optional([rules.maxLength(15), rules.minLength(15)]),
+    telefone: schema.string.optional([
+      rules.regex(/^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/),
+      rules.mobile({ locale: ['pt-BR'] }),
+      rules.unique({ table: 'alunos', column: 'telefone' }),
+    ]),
 
-    cep: schema.number.optional(),
+    cep: schema.string.optional([rules.regex(/[0-9]{5}-[\d]{3}/)]),
 
     logadouro: schema.string.optional([rules.alpha(), rules.maxLength(100)]),
 
