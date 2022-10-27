@@ -7,7 +7,7 @@ export default class AlunoValidator {
   public schema = schema.create({
     nome: schema.string([rules.alpha({ allow: ['space'] }), rules.maxLength(100)]),
 
-    cpf: schema.number.optional([
+    cpf: schema.string.optional([
       rules.unique({ table: 'alunos', column: 'id' }),
       rules.regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/),
     ]),
@@ -51,5 +51,7 @@ export default class AlunoValidator {
     bairro: schema.string.optional([rules.alpha({ allow: ['space'] }), rules.maxLength(120)]),
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    'numero.maxLength': 'oi',
+  }
 }

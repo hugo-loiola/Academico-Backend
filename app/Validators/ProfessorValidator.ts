@@ -48,7 +48,7 @@ export default class ProfessorValidator {
 
     complemento: schema.string.optional([rules.maxLength(100), rules.alpha({ allow: ['space'] })]),
 
-    numero: schema.string.optional([rules.maxLength(20), rules.alphaNum({ allow: ['dash'] })]),
+    numero: schema.number.optional([rules.range(1, 10000)]),
 
     bairro: schema.string.optional([rules.maxLength(100), rules.alpha({ allow: ['space'] })]),
   })
