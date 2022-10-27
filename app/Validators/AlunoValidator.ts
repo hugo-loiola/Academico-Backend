@@ -5,9 +5,12 @@ export default class AlunoValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    nome: schema.string([rules.alpha(), rules.maxLength(100)]),
+    nome: schema.string([rules.alpha({ allow: ['space'] }), rules.maxLength(100)]),
 
-    cpf: schema.number.optional([rules.minLength(15), rules.maxLength(15)]),
+    cpf: schema.number.optional([
+      rules.unique({ table: 'alunos', column: 'id' }),
+      rules.regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/),
+    ]),
 
     matricula: schema.string([
       rules.unique({
@@ -15,7 +18,6 @@ export default class AlunoValidator {
         table: 'alunos',
       }),
       rules.alphaNum(),
-      rules.minLength(20),
       rules.maxLength(20),
     ]),
 
@@ -25,24 +27,28 @@ export default class AlunoValidator {
       rules.maxLength(100),
     ]),
 
-    telefone: schema.number.optional([rules.maxLength(15), rules.minLength(15)]),
+    telefone: schema.string.optional([
+      rules.regex(/^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/),
+      rules.mobile({ locale: ['pt-BR'] }),
+      rules.unique({ table: 'alunos', column: 'telefone' }),
+    ]),
 
-    cep: schema.number.optional(),
+    cep: schema.string.optional([rules.regex(/[0-9]{5}-[\d]{3}/)]),
 
-    logadouro: schema.string.optional([rules.alpha(), rules.maxLength(100)]),
+    logadouro: schema.string.optional([rules.alpha({ allow: ['space'] }), rules.maxLength(100)]),
 
-    complemento: schema.string.optional([rules.maxLength(100), rules.alpha()]),
+    complemento: schema.string.optional([rules.maxLength(100), rules.alpha({ allow: ['space'] })]),
 
     numero: schema.string.optional([
       rules.unique({
         column: 'numero',
         table: 'alunos',
       }),
-      rules.alphaNum(),
+      rules.alphaNum({ allow: ['dash', 'space'] }),
       rules.maxLength(120),
     ]),
 
-    bairro: schema.string.optional([rules.alpha(), rules.maxLength(120)]),
+    bairro: schema.string.optional([rules.alpha({ allow: ['space'] }), rules.maxLength(120)]),
   })
 
   public messages: CustomMessages = {}
