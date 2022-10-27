@@ -39,7 +39,7 @@ export default class ProfessorValidator {
 
     telefone: schema.string.optional([rules.mobile({ locale: ['pt-BR'] })]),
 
-    cep: schema.number.optional(),
+    cep: schema.number.optional([rules.regex(/[0-9]{5}-[\d]{3}/)]),
 
     logradouro: schema.string.optional([rules.maxLength(100), rules.alpha({ allow: ['space'] })]),
 
