@@ -26,7 +26,7 @@ export default class ProfessorValidator {
   public schema = schema.create({
     nome: schema.string([rules.alpha({ allow: ['space'] }), rules.maxLength(100)]),
 
-    cpf: schema.string([rules.alphaNum({ allow: ['space', 'dash', 'underscore'] })]),
+    cpf: schema.string([rules.regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)]),
 
     matricula: schema.string([
       rules.alphaNum({ allow: ['space', 'dash', 'underscore'] }),
@@ -37,7 +37,10 @@ export default class ProfessorValidator {
 
     email: schema.string.optional([rules.email(), rules.maxLength(100)]),
 
-    telefone: schema.string.optional([rules.mobile({ locale: ['pt-BR'] })]),
+    telefone: schema.string.optional([
+      rules.mobile({ locale: ['pt-BR'] }),
+      rules.regex(/^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$/),
+    ]),
 
     cep: schema.number.optional([rules.regex(/[0-9]{5}-[\d]{3}/)]),
 

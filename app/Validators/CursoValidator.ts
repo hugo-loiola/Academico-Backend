@@ -10,7 +10,7 @@ export default class CursoValidator {
       rules.maxLength(50),
       rules.unique({ table: 'cursos', column: 'nome' }),
     ]),
-    duracao: schema.number.optional(),
+    duracao: schema.number.optional([rules.range(1, 5)]),
     modalidade: schema.string([rules.alpha(), rules.maxLength(1)]),
   })
 

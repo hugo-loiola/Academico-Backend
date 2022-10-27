@@ -24,7 +24,10 @@ export default class SalaValidator {
    *    ```
    */
   public schema = schema.create({
-    nome: schema.string([rules.maxLength(50), rules.alpha()]),
+    nome: schema.string([
+      rules.maxLength(50),
+      rules.alpha({ allow: ['space', 'underscore', 'dash'] }),
+    ]),
 
     capacidade: schema.number.optional([rules.range(1, 50)]),
 
