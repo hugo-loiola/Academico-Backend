@@ -4,55 +4,30 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 export default class AlunoValidator {
   constructor(protected ctx: HttpContextContract) {}
 
-  /*
-   * Define schema to validate the "shape", "type", "formatting" and "integrity" of data.
-   *
-   * For example:
-   * 1. The username must be of data type string. But then also, it should
-   *    not contain special characters or numbers.
-   *    ```
-   *     schema.string({}, [ rules.alpha() ])
-   *    ```
-   *
-   * 2. The email must be of data type string, formatted as a valid
-   *    email. But also, not used by any other user.
-   *    ```
-   *     schema.string({}, [
-   *       rules.email(),
-   *       rules.unique({ table: 'users', column: 'email' }),
-   *     ])
-   *    ```
-   */
   public schema = schema.create({
-    nome: schema.string([
-      rules.alpha(),
-      rules.unique({
-        column: 'nome',
-        table: 'alunos',
-      }),
-    ]),
+    nome: schema.string([rules.alpha()]),
 
-    cpf: schema.number(),
+    cpf: schema.number.optional(),
 
-    matricula: schema.string.optional([
+    matricula: schema.string([
       rules.unique({
         column: 'matricula',
         table: 'alunos',
       }),
     ]),
 
-    email: schema.string.nullableAndOptional([
+    email: schema.string.optional([
       rules.email(),
       rules.unique({ table: 'alunos', column: 'email' }),
     ]),
 
-    telefone: schema.string.nullableAndOptional(),
+    telefone: schema.string.optional(),
 
-    cep: schema.number.nullableAndOptional(),
+    cep: schema.number.optional(),
 
-    logadouro: schema.string.nullableAndOptional(),
+    logadouro: schema.string.optional(),
 
-    complemento: schema.string.nullableAndOptional(),
+    complemento: schema.string.optional(),
 
     numero: schema.string.optional([
       rules.unique({
@@ -61,19 +36,8 @@ export default class AlunoValidator {
       }),
     ]),
 
-    bairro: schema.string.nullableAndOptional(),
+    bairro: schema.string.optional(),
   })
 
-  /**
-   * Custom messages for validation failures. You can make use of dot notation `(.)`
-   * for targeting nested fields and array expressions `(*)` for targeting all
-   * children of an array. For example:
-   *
-   * {
-   *   'profile.username.required': 'Username is required',
-   *   'scores.*.number': 'Define scores as valid numbers'
-   * }
-   *
-   */
   public messages: CustomMessages = {}
 }
