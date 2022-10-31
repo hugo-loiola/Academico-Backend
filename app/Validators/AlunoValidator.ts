@@ -52,6 +52,7 @@ export default class AlunoValidator {
   })
 
   public messages: CustomMessages = {
-    'numero.maxLength': 'oi',
+    maxLength: 'o número máximo de caractéres do campo {{ field }} é de {{ options.maxLength }}',
+    minLength: 'o número máximo de caractéres do campo {{ field }} é de {{ options.minLength }}',
   }
 }
