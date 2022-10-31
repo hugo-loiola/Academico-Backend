@@ -1,4 +1,4 @@
-# Academico
+# Acadêmico
 
 ### Iniciar um projeto.
 
