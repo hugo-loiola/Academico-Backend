@@ -40,10 +40,6 @@ export default class AlunoValidator {
     complemento: schema.string.optional([rules.maxLength(100), rules.alpha({ allow: ['space'] })]),
 
     numero: schema.string.optional([
-      rules.unique({
-        column: 'numero',
-        table: 'alunos',
-      }),
       rules.alphaNum({ allow: ['dash', 'space'] }),
       rules.maxLength(120),
     ]),
@@ -52,7 +48,11 @@ export default class AlunoValidator {
   })
 
   public messages: CustomMessages = {
-    maxLength: 'o número máximo de caractéres do campo {{ field }} é de {{ options.maxLength }}',
-    minLength: 'o número máximo de caractéres do campo {{ field }} é de {{ options.minLength }}',
+    'maxLength': 'o número máximo de caractéres do campo {{ field }} é de {{ options.maxLength }}',
+    'minLength': 'o número máximo de caractéres do campo {{ field }} é de {{ options.minLength }}',
+    'unique': 'o campo {{field}} é único',
+    'cpf.regex': 'o cpf tem a formatação 000.111.222-33',
+    'cep.regex': 'o cep tem a formatação 12345-67',
+    'telefone.regex': 'o telefone tem a formatação (00)19999-9999',
   }
 }
