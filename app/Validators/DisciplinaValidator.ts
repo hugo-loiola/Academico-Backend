@@ -16,7 +16,7 @@ export default class DisciplinaValidator {
 
   public messages: CustomMessages = {
     'nome.unique': 'Disciplina tem que ser única',
-    'nome.maxLength': 'Máximo de 50 caractéres atinjido!',
+    'nome.maxLength': 'Máximo de {{ options.maxLength }} caractéres atinjido!',
     'curso_id.exists': 'Curso não existe',
   }
 }

@@ -14,5 +14,9 @@ export default class CursoValidator {
     modalidade: schema.string([rules.alpha(), rules.maxLength(1)]),
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    maxLength: 'o número máximo de caractéres do campo {{ field }} é de {{ options.maxLength }}',
+    range: '{{ field }} tem que ser entre {{ options.range }}',
+    unique: '{{field}} tem que ser único',
+  }
 }

@@ -17,7 +17,7 @@ export default class AulaValidator {
 
   public messages: CustomMessages = {
     'data': 'A formatação é 2020-05-07',
-    'maxLength': 'O conteúdo tem um máximo de 255 caractéres',
+    'maxLength': 'O conteúdo tem um máximo de {{ options.maxLength }} caractéres',
     'turma_id.unique': 'Turma tem que ser única',
     'turma_id.exists': 'Turma tem que existir',
   }
