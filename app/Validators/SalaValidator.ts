@@ -13,5 +13,9 @@ export default class SalaValidator {
 
     tipo: schema.string([rules.maxLength(1), rules.alpha()]),
   })
-  public messages: CustomMessages = {}
+
+  public messages: CustomMessages = {
+    maxLength: 'o número máximo de caractéres do campo {{ field }} é de {{ options.maxLength }}',
+    range: '{{ field }} tem que ser entre {{ options.range }}',
+  }
 }
