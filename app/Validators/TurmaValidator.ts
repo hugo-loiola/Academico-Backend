@@ -30,5 +30,9 @@ export default class TurmaValidator {
     turno: schema.string([rules.maxLength(1), rules.alpha()]),
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    unique: '{{ field }} tem que ser único',
+    exists: '{{ field }} tem que existir',
+    maxLength: 'o número máximo de caractéres do campo {{ field }} é de {{ options.maxLength }}',
+  }
 }

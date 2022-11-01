@@ -16,5 +16,8 @@ export default class ChamadaValidator {
     presenca: schema.string([rules.maxLength(1), rules.alpha()]),
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    unique: '{{field}} tem que ser único',
+    exists: '{{field}} tem que existir',
+  }
 }

@@ -16,5 +16,8 @@ export default class TurmaAlunoValidator {
     ]),
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    unique: '{{ field }} tem que ser único',
+    exists: '{{ field }} tem que existir',
+  }
 }

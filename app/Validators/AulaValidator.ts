@@ -7,7 +7,7 @@ export default class AulaValidator {
   public schema = schema.create({
     data: schema.date({ format: 'yyyy-MM-dd' }),
 
-    conteudo: schema.string([rules.alpha({ allow: ['space'] })]),
+    conteudo: schema.string([rules.alpha({ allow: ['space'] }), rules.maxLength(255)]),
 
     turma_id: schema.number([
       rules.unique({ table: 'turmas', column: 'id' }),
@@ -15,5 +15,10 @@ export default class AulaValidator {
     ]),
   })
 
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    'data': 'A formatação é 2020-05-07',
+    'maxLength': 'O conteúdo tem um máximo de {{ options.maxLength }} caractéres',
+    'turma_id.unique': 'Turma tem que ser única',
+    'turma_id.exists': 'Turma tem que existir',
+  }
 }
