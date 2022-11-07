@@ -4,15 +4,17 @@
 
     npm init adonis-ts-app@latest [nome]
 
-### Instalando o `lucid` para o baco de dados.
+### Lucid
+
+#### Instalar
 
     npm i @adonisjs/lucid
 
-### Configurando o `lucid`.
+#### Configurar
 
     node ace configure @adonisjs/lucid
 
-### Start o servidor de desenvolvimento.
+### Iniciar o servidor de desenvolvimento.
 
     node ace serve --watch
 
@@ -284,3 +286,13 @@ export default class AlunoValidator {
   }
 }
 ```
+
+### Autenticação
+
+#### instalar
+
+    npm i @adonisjs/auth
+
+#### configurar
+
+    node ace configure @adonisjs/auth
