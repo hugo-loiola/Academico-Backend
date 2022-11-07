@@ -24,6 +24,7 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
+Route.post('/users', 'UsersController.store')
 Route.resource('/curso', 'CursosController').apiOnly()
 Route.resource('/disciplina', 'DisciplinasController').apiOnly()
 Route.resource('/sala', 'SalasController').apiOnly()
