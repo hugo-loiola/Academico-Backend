@@ -2,25 +2,14 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Professor from 'App/Models/Professor'
+import ProfessorValidator from 'App/Validators/ProfessorValidator'
 
 export default class ProfessorsController {
   async index() {
     return await Professor.query().preload('turmas')
   }
   async store({ request }) {
-    const dados = request.only([
-      'nome',
-      'cpf',
-      'matricula',
-      'salario',
-      'email',
-      'telefone',
-      'cep',
-      'logradouro',
-      'complemento',
-      'numero',
-      'bairro',
-    ])
+    const dados = await request.validate(ProfessorValidator)
     return await Professor.create(dados)
   }
   async show({ request }) {
@@ -35,19 +24,7 @@ export default class ProfessorsController {
   async update({ request }) {
     const id = request.param('id')
     const professor = await Professor.findOrFail(id)
-    const dados = request.only([
-      'nome',
-      'cpf',
-      'matricula',
-      'salario',
-      'email',
-      'telefone',
-      'cep',
-      'logradouro',
-      'complemento',
-      'numero',
-      'bairro',
-    ])
+    const dados = await request.validate(ProfessorValidator)
 
     professor.merge(dados)
 
