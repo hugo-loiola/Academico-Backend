@@ -295,4 +295,13 @@ export default class AlunoValidator {
 
 #### configurar
 
-    node ace configure @adonisjs/auth
+```bash
+node ace configure @adonisjs/auth
+# Lucid
+# API token
+# User
+# Yes
+# Database
+# Yes
+npm i phc-argon2
+```
