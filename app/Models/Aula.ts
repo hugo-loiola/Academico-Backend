@@ -27,4 +27,5 @@ export default class Aula extends BaseModel {
 
   @hasMany(() => Chamada)
   public chamada: HasMany<typeof Chamada>
+
 }
