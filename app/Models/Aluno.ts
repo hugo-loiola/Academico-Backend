@@ -50,4 +50,5 @@ export default class Aluno extends BaseModel {
     pivotTable: 'turma_alunos',
   })
   public turmas: ManyToMany<typeof Turma>
+
 }

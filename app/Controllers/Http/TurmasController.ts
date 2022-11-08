@@ -10,6 +10,7 @@ export default class TurmasController {
       .preload('semestre')
       .preload('disciplina')
       .preload('sala')
+      .preload('alunos')
   }
   async store({ request }) {
     const dados = request.only([
