@@ -305,3 +305,29 @@ node ace configure @adonisjs/auth
 # Yes
 npm i phc-argon2
 ```
+
+#### No arquivo `start/kernel.ts`
+
+```ts
+Server.middleware.registerNamed({ auth: () => import('App/Middleware/Auth') })
+```
+
+#### Depois altere a rota
+
+```ts
+Route.post('/users', 'UsersController.store').middleware('auth')
+Route.post('/login', 'UsersController.login')
+
+Route.group(() => {
+  Route.resource('/curso', 'CursosController').apiOnly()
+  Route.resource('/disciplina', 'DisciplinasController').apiOnly()
+  Route.resource('/sala', 'SalasController').apiOnly()
+  Route.resource('/semestre', 'SemestresController').apiOnly()
+  Route.resource('/professor', 'ProfessorsController').apiOnly()
+  Route.resource('/aluno', 'AlunosController').apiOnly()
+  Route.resource('/turma', 'TurmasController').apiOnly()
+  Route.resource('/turma_aluno', 'TurmaAlunosController').apiOnly()
+  Route.resource('/aula', 'AulasController').apiOnly()
+  Route.resource('/chamada', 'ChamadasController').apiOnly()
+}).middleware('auth')
+```
