@@ -2,6 +2,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Aluno from 'App/Models/Aluno'
+import AlunoUpdateValidator from 'App/Validators/AlunoUpdateValidator'
 import AlunoValidator from 'App/Validators/AlunoValidator'
 
 export default class AlunosController {
@@ -25,7 +26,7 @@ export default class AlunosController {
   async update({ request }) {
     const id = request.param('id')
     const aluno = await Aluno.findOrFail(id)
-    const dados = await request.validate(AlunoValidator)
+    const dados = await request.validate(AlunoUpdateValidator)
 
     aluno.merge(dados)
     return await aluno.save()

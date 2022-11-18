@@ -2,6 +2,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Professor from 'App/Models/Professor'
+import ProfessorUpdateValidator from 'App/Validators/ProfessorUpdateValidator'
 import ProfessorValidator from 'App/Validators/ProfessorValidator'
 
 export default class ProfessorsController {
@@ -24,7 +25,7 @@ export default class ProfessorsController {
   async update({ request }) {
     const id = request.param('id')
     const professor = await Professor.findOrFail(id)
-    const dados = await request.validate(ProfessorValidator)
+    const dados = await request.validate(ProfessorUpdateValidator)
 
     professor.merge(dados)
 

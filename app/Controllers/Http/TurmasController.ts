@@ -2,6 +2,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Turma from 'App/Models/Turma'
+import TurmaUpdateValidator from 'App/Validators/TurmaUpdateValidator'
 import TurmaValidator from 'App/Validators/TurmaValidator'
 
 export default class TurmasController {
@@ -30,7 +31,7 @@ export default class TurmasController {
   async update({ request }) {
     const id = request.param('id')
     const turma = await Turma.findOrFail(id)
-    const dados = await request.validate(TurmaValidator)
+    const dados = await request.validate(TurmaUpdateValidator)
 
     turma.merge(dados)
 

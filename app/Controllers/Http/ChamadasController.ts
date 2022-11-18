@@ -2,6 +2,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Chamada from 'App/Models/Chamada'
+import ChamadaUpdateValidator from 'App/Validators/ChamadaUpdateValidator'
 import ChamadaValidator from 'App/Validators/ChamadaValidator'
 
 export default class ChamadasController {
@@ -25,7 +26,7 @@ export default class ChamadasController {
   async update({ request }) {
     const id = request.param('id')
     const chamada = await Chamada.findOrFail(id)
-    const dados = await request.validate(ChamadaValidator)
+    const dados = await request.validate(ChamadaUpdateValidator)
 
     chamada.merge(dados)
 
