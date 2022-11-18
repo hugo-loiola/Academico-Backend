@@ -5,11 +5,14 @@ export default class SemestreUpdateValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    nome: schema.string([rules.alpha({ allow: ['space'] }), rules.maxLength(30)]),
+    nome: schema.string.nullableAndOptional([
+      rules.alpha({ allow: ['space'] }),
+      rules.maxLength(30),
+    ]),
 
-    data_inicio: schema.date({ format: 'yyyy-MM-dd' }),
+    data_inicio: schema.date.nullableAndOptional({ format: 'yyyy-MM-dd' }),
 
-    data_fim: schema.date({ format: 'yyyy-MM-dd' }),
+    data_fim: schema.date.nullableAndOptional({ format: 'yyyy-MM-dd' }),
   })
 
   public messages: CustomMessages = {

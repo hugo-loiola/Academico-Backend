@@ -3,15 +3,19 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class AlunoUpdateValidator {
   constructor(protected ctx: HttpContextContract) {}
+
   public schema = schema.create({
-    nome: schema.string([rules.alpha({ allow: ['space'] }), rules.maxLength(100)]),
+    nome: schema.string.nullableAndOptional([
+      rules.alpha({ allow: ['space'] }),
+      rules.maxLength(100),
+    ]),
 
     cpf: schema.string.nullableAndOptional([
       rules.unique({ table: 'alunos', column: 'id' }),
       rules.regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/),
     ]),
 
-    matricula: schema.string([
+    matricula: schema.string.nullableAndOptional([
       rules.unique({
         column: 'matricula',
         table: 'alunos',

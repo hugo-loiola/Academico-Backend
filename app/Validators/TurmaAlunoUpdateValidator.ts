@@ -5,12 +5,12 @@ export default class TurmaAlunoUpdateValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    turma_id: schema.number([
+    turma_id: schema.number.nullableAndOptional([
       rules.exists({ table: 'turmas', column: 'id' }),
       rules.unique({ table: 'turmas', column: 'id' }),
     ]),
 
-    aluno_id: schema.number([
+    aluno_id: schema.number.nullableAndOptional([
       rules.exists({ table: 'turmas', column: 'id' }),
       rules.unique({ table: 'turmas', column: 'id' }),
     ]),

@@ -5,11 +5,14 @@ export default class AulaUpdateValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    data: schema.date({ format: 'yyyy-MM-dd' }),
+    data: schema.date.nullableAndOptional({ format: 'yyyy-MM-dd' }),
 
-    conteudo: schema.string([rules.alpha({ allow: ['space'] }), rules.maxLength(255)]),
+    conteudo: schema.string.nullableAndOptional([
+      rules.alpha({ allow: ['space'] }),
+      rules.maxLength(255),
+    ]),
 
-    turma_id: schema.number([
+    turma_id: schema.number.nullableAndOptional([
       rules.unique({ table: 'turmas', column: 'id' }),
       rules.exists({ table: 'turmas', column: 'id' }),
     ]),

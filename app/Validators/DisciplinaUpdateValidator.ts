@@ -11,7 +11,7 @@ export default class DisciplinaUpdateValidator {
       rules.alpha(),
     ]),
 
-    curso_id: schema.number([rules.exists({ table: 'cursos', column: 'id' })]),
+    curso_id: schema.number.nullableAndOptional([rules.exists({ table: 'cursos', column: 'id' })]),
   })
 
   public messages: CustomMessages = {

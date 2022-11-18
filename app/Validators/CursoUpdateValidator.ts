@@ -5,13 +5,14 @@ export default class CursoUpdateValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    nome: schema.string([
+    nome: schema.string.nullableAndOptional([
       rules.alpha(),
       rules.maxLength(50),
       rules.unique({ table: 'cursos', column: 'nome' }),
     ]),
-    duracao: schema.number.optional([rules.range(1, 5)]),
-    modalidade: schema.string([rules.alpha(), rules.maxLength(1)]),
+    duracao: schema.number.nullableAndOptional([rules.range(1, 5)]),
+
+    modalidade: schema.string.nullableAndOptional([rules.alpha(), rules.maxLength(1)]),
   })
 
   public messages: CustomMessages = {

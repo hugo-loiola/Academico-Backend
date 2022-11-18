@@ -5,11 +5,14 @@ export default class ProfessorUpdateValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    nome: schema.string([rules.alpha({ allow: ['space'] }), rules.maxLength(100)]),
+    nome: schema.string.nullableAndOptional([
+      rules.alpha({ allow: ['space'] }),
+      rules.maxLength(100),
+    ]),
 
-    cpf: schema.string([rules.regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)]),
+    cpf: schema.string.nullableAndOptional([rules.regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)]),
 
-    matricula: schema.string([
+    matricula: schema.string.nullableAndOptional([
       rules.alphaNum({ allow: ['space', 'dash', 'underscore'] }),
       rules.maxLength(20),
     ]),
