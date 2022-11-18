@@ -1,0 +1,38 @@
+import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+
+export default class TurmaUpdateValidator {
+  constructor(protected ctx: HttpContextContract) {}
+
+  public schema = schema.create({
+    nome: schema.string([rules.alpha({ allow: ['space'] }), rules.maxLength(50)]),
+
+    professor_id: schema.number.nullableAndOptional([
+      rules.exists({ table: 'professor', column: 'id' }),
+      rules.unique({ table: 'professor', column: 'id' }),
+    ]),
+
+    semestre_id: schema.number.nullableAndOptional([
+      rules.exists({ table: 'semestre', column: 'id' }),
+      rules.unique({ table: 'semestre', column: 'id' }),
+    ]),
+
+    disciplina_id: schema.number.nullableAndOptional([
+      rules.exists({ table: 'disciplina', column: 'id' }),
+      rules.unique({ table: 'disciplina', column: 'id' }),
+    ]),
+
+    sala_id: schema.number.nullableAndOptional([
+      rules.exists({ table: 'sala', column: 'id' }),
+      rules.unique({ table: 'sala', column: 'id' }),
+    ]),
+
+    turno: schema.string.nullableAndOptional([rules.maxLength(1), rules.alpha()]),
+  })
+
+  public messages: CustomMessages = {
+    unique: '{{ field }} tem que ser único',
+    exists: '{{ field }} tem que existir',
+    maxLength: 'o número máximo de caractéres do campo {{ field }} é de {{ options.maxLength }}',
+  }
+}

@@ -2,6 +2,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Disciplina from 'App/Models/Disciplina'
+import DisciplinaUpdateValidator from 'App/Validators/DisciplinaUpdateValidator'
 import DisciplinaValidator from 'App/Validators/DisciplinaValidator'
 
 export default class DisciplinasController {
@@ -25,7 +26,7 @@ export default class DisciplinasController {
   async update({ request }) {
     const id = request.param('id')
     const disciplina = await Disciplina.findOrFail(id)
-    const dados = await request.validate(DisciplinaValidator)
+    const dados = await request.validate(DisciplinaUpdateValidator)
 
     disciplina.merge(dados)
 

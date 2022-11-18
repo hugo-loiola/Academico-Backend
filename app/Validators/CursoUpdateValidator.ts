@@ -1,22 +1,23 @@
 import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class SalaValidator {
+export default class CursoUpdateValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    nome: schema.string([
+    nome: schema.string.nullableAndOptional([
+      rules.alpha(),
       rules.maxLength(50),
-      rules.alpha({ allow: ['space', 'underscore', 'dash'] }),
+      rules.unique({ table: 'cursos', column: 'nome' }),
     ]),
+    duracao: schema.number.nullableAndOptional([rules.range(1, 5)]),
 
-    capacidade: schema.number.optional([rules.range(1, 50)]),
-
-    tipo: schema.string([rules.maxLength(1), rules.alpha()]),
+    modalidade: schema.string.nullableAndOptional([rules.alpha(), rules.maxLength(1)]),
   })
 
   public messages: CustomMessages = {
     maxLength: 'o número máximo de caractéres do campo {{ field }} é de {{ options.maxLength }}',
     range: '{{ field }} tem que ser entre {{ options.range }}',
+    unique: '{{field}} tem que ser único',
   }
 }

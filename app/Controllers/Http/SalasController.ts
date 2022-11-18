@@ -2,6 +2,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Sala from 'App/Models/Sala'
+import SalaUpdateValidator from 'App/Validators/SalaUpdateValidator'
 import SalaValidator from 'App/Validators/SalaValidator'
 
 export default class SalasController {
@@ -25,7 +26,7 @@ export default class SalasController {
   async update({ request }) {
     const id = request.param('id')
     const sala = await Sala.findOrFail(id)
-    const dados = await request.validate(SalaValidator)
+    const dados = await request.validate(SalaUpdateValidator)
 
     sala.merge(dados)
 
